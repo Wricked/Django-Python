@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+<!-- Register page -->
+
+{% block title %}
+<title>Register a new employee</title>
+{% endblock %}
+
+{% block body %}
+<div class="col-lg-12">
+    <div class="panel panel-default">
+        <div class="panel-heading mb-5 mt-5">
+            <div class="panel-heading mb-5 mt-5 text-info">
+                Adding a employee
+            </div>
+        </div>
+        <form class="form-post" action="{% url 'new_employee' %}" method="POST">
+
+            {% csrf_token %}
+
+            <div class="ml-3">
+
+                {% if form_add.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    <div class="non-field-errors">
+                        {{ form_add.non_field_errors }}
+                    </div>
+                </div>
+                {% endif %}
+
+                {% for field in form_add %}
+                <div class="fieldWrapper mt-2">
+                    {{ field.errors }}
+                    {{ field.label_tag }} {{ field }}
+                    {% if field.help_text %}
+                    <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+                {% endfor %}
+
+                <button class="btn btn-outline-primary mt-2" type="submit" value="Submit"> Register a employee</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

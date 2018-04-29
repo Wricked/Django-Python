@@ -1,0 +1,55 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<!-- Main template -->
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    {% block title %}
+    <!-- title goes here -->
+    {% endblock %}
+</head>
+<body>
+<div class="container">
+    <div class="header mt-5 mb-3">
+        <h3 class="text-muted">X-factor Employee Manager</h3>
+    </div>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}">Home page</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'list' %}">Show employee list</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'new_employee' %}">Register a new employee</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'delete_employee' %}">Remove a employee</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'new_department' %}">Register a new department</a>
+        </li>
+    </ul>
+    <div class="row content">
+        {% if messages %}
+        <div class="alert alert-success m-5" role="alert">
+            <ul class="messages">
+                {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        {% block body %}
+        <!-- htmls content would be here -->
+        {% endblock %}
+    </div>
+</div>
+</body>
+</html>
